@@ -3,6 +3,9 @@ package org.automation;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.lang.reflect.Method;
+
 public class LoginTests extends BaseTest {
 
 
@@ -61,4 +64,36 @@ public class LoginTests extends BaseTest {
 //        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "URL after login does not match expected URL.");
 
     }
+
+    //write a test for locked_out_user and verify this message Epic sadface: Sorry, this user has been locked out.
+    @Test
+    public void loginLockedOutUser() throws InterruptedException {
+        LoginPageLazyInit loginPage = new LoginPageLazyInit(driver);
+        loginPage.enterUsername("locked_out_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLoginByDataTest();
+        Thread.sleep(2000);
+        Assert.assertTrue(loginPage.isErrorButtonDisplayed(), "Error button is not displayed.");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Sorry, this user has been locked out.", "Error message text does not match.");
+        loginPage.clickErrorCrossButton();
+        Assert.assertTrue(loginPage.isErrorMessagePresent(), "Error message is still displayed after closing it.");
+    }
+
+    @Test
+    public void preformanceGlitchUser(Method method) throws Exception {
+        LoginPageLazyInit loginPage = new LoginPageLazyInit(driver);
+        loginPage.enterUsername("performance_glitch_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLoginByDataTest();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "URL after login does not match expected URL.");
+
+
+        String baselinePath = "screenshots/" + method.getName() + ".png";
+        boolean isSame = ScreenshotUtils.takeAndCompareScreenshot(driver, baselinePath);
+        Assert.assertTrue(isSame, "Screenshots do not match!");
+    }
+
+
 }
+
+
