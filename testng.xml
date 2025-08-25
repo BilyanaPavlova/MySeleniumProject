@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Full_Regression">
+    <listeners>
+        <listener class-name="org.automation.FormattedTestListener"/>
+    </listeners>
+    <test name="Login_and_Browsers_Tests">
+        <classes>
+            <class name="org.automation.LoginTests"/>
+            <class name="org.automation.BrowsersTests"/>
+        </classes>
+    </test>
+</suite>

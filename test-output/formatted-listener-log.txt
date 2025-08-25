@@ -1,0 +1,8 @@
+Test suite started: Login_and_Browsers_Tests
+[2025-08-25 22:48:39] PASSED - Test: loginLockedOutUser | Parameters: [Ljava.lang.Object;@3eed0f5 | Duration: 3057ms
+[2025-08-25 22:48:46] PASSED - Test: loginStandardUser | Parameters: [Ljava.lang.Object;@64bfd6fd | Duration: 614ms
+[2025-08-25 22:48:52] PASSED - Test: loginWithoutUser | Parameters: [Ljava.lang.Object;@32f0c7f8 | Duration: 535ms
+[2025-08-25 22:48:58] PASSED - Test: openBrowserheName | Parameters: [Ljava.lang.Object;@459cfcca | Duration: 41ms
+[2025-08-25 22:49:13] PASSED - Test: preformanceGlitchUser | Parameters: [Ljava.lang.Object;@131ff6fa | Duration: 6594ms
+[2025-08-25 22:50:24] PASSED - Test: testInFirefox | Parameters: [Ljava.lang.Object;@1cf0cacc | Duration: 65587ms
+Test suite finished: Login_and_Browsers_Tests

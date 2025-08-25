@@ -9,11 +9,18 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
 import java.time.Duration;
 
+//Yes, if you annotate your `BaseTest` class with `@Listeners`,
+// all test classes that extend `BaseTest` will inherit the listener annotation.
+// The listener will be active for all child test classes,
+// so you do not need to annotate each subclass separately.
+
+@Listeners(org.automation.FormattedTestListener.class)
 public class BaseTest {
 
     public WebDriver driver;
