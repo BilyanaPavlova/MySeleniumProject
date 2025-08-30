@@ -1,0 +1,3 @@
+Test suite started: MySeleniumProject
+[2025-08-30 23:27:11] PASSED - Test: testInChromeDriver | Parameters: [Ljava.lang.Object;@15bc339 | Duration: 2754ms
+Test suite finished: MySeleniumProject

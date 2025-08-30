@@ -1,0 +1,50 @@
+RUN ALLURE REPORTS IN BROWSER COMMANDS:
+
+️⃣ Add the Allure Maven Plugin**
+
+Add this inside your `<build><plugins>` section:
+
+```xml
+<plugin>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-maven</artifactId>
+    <version>2.13.10</version> <!-- latest stable -->
+    <configuration>
+        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+    </configuration>
+</plugin>
+```
+
+---
+
+ Run tests and generate report**
+
+```bash
+# Run your tests (TestNG + Maven)
+mvn clean test
+
+# Generate Allure report
+mvn allure:report
+
+# Open the report
+mvn allure:serve
+
+* `mvn allure:report` generates the HTML files in `target/site/allure-maven/`.
+* `mvn allure:serve` starts a local server and opens the report in your browser.
+
+💡 **Tip:** Make sure your `allure-results` folder is inside `target/`
+(as we configured in the Surefire plugin), otherwise the plugin won’t find the results.
+
+*Note!!!!:
+The mvn allure:serve command starts a local web server to display the Allure report
+and keeps running until you manually stop it. This process stays active in the terminal
+to serve the report at a local address (usually http://localhost:port).
+You need to stop it with Ctrl+C when you are done viewing the report.
+
+When running in Jenkins, there is no interactive terminal, so you cannot use Ctrl+C. Instead:
+
+
+Jenkins jobs should not use mvn allure:serve because it starts a server and waits indefinitely.
+Use mvn allure:report to generate the static HTML report files.
+Archive the generated report (e.g., from target/site/allure-maven/) as a build artifact or use a Jenkins Allure plugin to publish the report.
+This way, the process finishes automatically, and the report is accessible from Jenkins UI.

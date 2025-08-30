@@ -24,7 +24,7 @@ Download them from Maven repository-->
     <build>
             <plugins>
                 <plugin>
-                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin --><!-- Maven Surefire Plugin за стартиране на тестовете и генериране на XML отчети -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
@@ -34,7 +34,8 @@ Download them from Maven repository-->
                     </configuration>
                 </plugin>
 
-                    <plugin>
+                <!-- Maven Surefire Plugin за стартиране на тестовете и генериране на XML отчети -->
+                <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.5.3</version>
@@ -42,8 +43,21 @@ Download them from Maven repository-->
                             <suiteXmlFiles>
                                 <suiteXmlFile>testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
+                            <!--${project.build.directory} points to target/
+                                allure.results.directory tells Allure to write JSON files there-->
+                            <systemPropertyVariables>
+                                <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
+                <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>2.15.2</version> <!-- latest stable -->
+                    <configuration>
+                        <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    </configuration>
+                </plugin>
 
             </plugins>
     </build>
@@ -61,6 +75,7 @@ Download them from Maven repository-->
           <groupId>org.testng</groupId>
           <artifactId>testng</artifactId>
           <version>7.11.0</version>
+          <scope>test</scope>
       </dependency>
 
 
@@ -81,6 +96,15 @@ Download them from Maven repository-->
           <artifactId>webdrivermanager</artifactId>
           <version>6.2.0</version>
       </dependency>
+
+      <!-- Allure за красиви HTML отчети (опция) -->
+      <dependency>
+          <groupId>io.qameta.allure</groupId>
+          <artifactId>allure-testng</artifactId>
+          <version>2.29.1</version>
+          <scope>test</scope>
+      </dependency>
+
 
 
   </dependencies>
